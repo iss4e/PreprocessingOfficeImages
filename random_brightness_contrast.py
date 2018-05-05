@@ -7,9 +7,15 @@ from shutil import copyfile
 
 import numpy
 
-processed_path = sys.argv[1]
+"""
+    Adds random brightness and contrast to images in a path (in place)
+    
+    To use: python random_brightness_contrast.py <path to images>
+    Note: Adjust the deviation values to change the strength of image enhancements (second arg in normal function)
+"""
+image_folder_path = sys.argv[1]
 
-listOfFiles = os.listdir(processed_path)
+listOfFiles = os.listdir(image_folder_path)
 lenFiles = len(listOfFiles)
 
 for filename in tqdm(listOfFiles):
@@ -18,7 +24,7 @@ for filename in tqdm(listOfFiles):
     if  'txt' in exten:
         continue
     
-    file = os.path.join(processed_path, filename)
+    file = os.path.join(image_folder_path, filename)
     
     img = Image.open(file) 
     
@@ -41,13 +47,13 @@ for filename in tqdm(listOfFiles):
         tr_image = c_enhancer.enhance(contrast_value)
         
         transformed_name = "{}__{}".format(name, i)
-        tr_image.save(os.path.join(processed_path, transformed_name +'.jpg'))
+        tr_image.save(os.path.join(image_folder_path, transformed_name +'.jpg'))
         
         text_filename = transformed_name + '.txt'
         old_text_filename = name + '.txt'
     
-        new_text_path = os.path.join(processed_path, text_filename)
-        old_text_path = os.path.join(processed_path, old_text_filename)
+        new_text_path = os.path.join(image_folder_path, text_filename)
+        old_text_path = os.path.join(image_folder_path, old_text_filename)
         
         copyfile(old_text_path, new_text_path)
 

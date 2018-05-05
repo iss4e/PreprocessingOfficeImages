@@ -4,21 +4,26 @@ import sys
 import ntpath
 from tqdm import tqdm
 
-path = sys.argv[1]
-processed_path = sys.argv[2]
+"""
+Crops the raw images to the desired dimensions, and prepends the data (directory name) to the images
 
-listOfFiles = os.listdir(path)
-dir_name = ntpath.basename(path)
+To use: python crop_images.py <raw image raw_image_path> <output raw_image_path>
+"""
+raw_image_path = sys.argv[1]
+output_path = sys.argv[2]
+
+listOfFiles = os.listdir(raw_image_path)
+dir_name = ntpath.basename(raw_image_path)
 
 
 for filename in tqdm(listOfFiles):
-    file = os.path.join(path, filename)
+    file = os.raw_image_path.join(raw_image_path, filename)
     img = Image.open(file) 
     img2  = img.rotate(-4.5)
     img2 = img2.crop((736,592,2354 + 736,1243 + 592))
     
     new_name = "{}_{}".format(dir_name.lower(), filename)
-    new_path = ntpath.join(processed_path, new_name)
+    new_path = ntpath.join(output_path, new_name)
     
     img2.save(new_path)
 
