@@ -8,9 +8,15 @@ import random
 from collections import defaultdict
 import glob
 
-processed_path = sys.argv[1]
+"""
+This script may be used if it is desired to label the split images individually, ie. split them into 5 regions first,
+then label each individually.
+
+To use: python label_split_images.py <images folder path>
+"""
+image_folder_path = sys.argv[1]
  
-images = [img for img in glob.glob(os.path.join(processed_path, "*.jpg"))]
+images = [img for img in glob.glob(os.path.join(image_folder_path, "*.jpg"))]
 strip_images = [img.split(".")[0] for img in images]
 
 len_imgs = len(strip_images)
