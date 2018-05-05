@@ -6,10 +6,23 @@ from shutil import copyfile
 from tqdm import tqdm
 import random
 
+"""
+Split the images in the input folder into 4 quadrants + center, preserving their label in a txt file.
+Each split image is appended with a 0 to 4 (depending on its spatial position) in its name.
+The label for the image is found in the corresponding txt file.
+
+To use: python split_to_five.py <input folder> <output folder path>
+
+Note:
+The current script drops 150 of the positive examples corresponding to the vector 00010.
+This is due to the nature of the data, and should be modified if necessary.
+
+"""
+
 
 def split_image(image_name):
     
-    img_path = os.path.join(processed_path, image_name + '.jpg')
+    img_path = os.path.join(image_folder_path, image_name + '.jpg')
     img = Image.open(img_path)
     
     width, height = img.size
@@ -31,11 +44,10 @@ def split_image(image_name):
     return split_images
    
      
-
-processed_path = sys.argv[1]
+image_folder_path = sys.argv[1]
 output_path = sys.argv[2]
 
-listOfFiles = os.listdir(processed_path)
+listOfFiles = os.listdir(image_folder_path)
 lenFiles = len(listOfFiles)
 
 category_to_image = defaultdict(list)
@@ -44,10 +56,13 @@ for i, filename in enumerate(listOfFiles):
     name, ext = filename.split('.')
     
     if ext == 'txt':
-        with open(os.path.join(processed_path, filename), 'r') as f:
+        with open(os.path.join(image_folder_path, filename), 'r') as f:
             category = f.read()
             category_to_image[category].append(name)
             
+# HACK: Drop some of the training examples which only contain a bottom right person
+# This is due to the nature of the gathered data
+
 right_bottom_images = category_to_image["00010"]
 random.shuffle(right_bottom_images)
 category_to_image["00010"] = right_bottom_images[:150]
