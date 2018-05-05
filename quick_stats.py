@@ -27,24 +27,11 @@ for i, filename in enumerate(listOfFiles):
                 index_to_images[(image_number,0)].append(name)
             elif class_val == "1":
                 index_to_images[(image_number,1)].append(name)
-            
-positive_class_num = [151, 167, 165, 180, 105]
-
-for index, images in index_to_images.iteritems():
-    random.shuffle(images)
+       
+prnt_seq = []       
+for k,v in index_to_images.iteritems():
+    prnt_seq .append( "Class # {} Img # {}, number of imgs: {}".format(k[1], k[0], len(v)))
     
-    
-    images = images[ positive_class_num[int(index[0])] : ]
-    
-    for image in images:
-        text_file = os.path.join(processed_path, image + '.txt')
-        img_file = os.path.join(processed_path, image + '.jpg')
-        
-        os.remove(text_file)
-        os.remove(img_file)
-    
-
-    
-
-
-
+prnt_seq.sort()
+for item in prnt_seq:
+    print item

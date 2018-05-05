@@ -22,16 +22,16 @@ for filename in tqdm(listOfFiles):
     
     img = Image.open(file) 
     
-    transformed_images = [img for i in range(5)]
+    transformed_images = [img for i in range(2)]
     
     
     for i, tr_image in enumerate(transformed_images):
     
-        contrast_value = numpy.random.normal(1,0.025)
-        brightness_value = numpy.random.normal(1,0.05)
+        contrast_value = numpy.random.normal(1,0.08)
+        brightness_value = numpy.random.normal(1,0.15)
         
-        #contrast_value = 1
-        #brightness_value = 1-.22
+        #contrast_value = 1 + 2 * 0.08
+        #brightness_value = 1 + 2 * 0.15
         
         b_enhancer = ImageEnhance.Brightness(tr_image)
         
