@@ -17,8 +17,8 @@ Shrinks the dataset of positive and negative examples,
  After this program is run, the folder will contain the specified number of images per spatial location
  for both positive and negative examples at that index.
  
- For example, if the first element in the array is 100, there will be 100 occupied and 100 unoccupied images
- after the program is run.
+For example, if the first element in the array is 100, 
+there will be 100 occupied and 100 unoccupied image for the top left quadrant after the program is run
  
  The array values should be chosen based on the output of 'stats_split_image.py'
  
