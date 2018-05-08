@@ -5,7 +5,7 @@ import ntpath
 from tqdm import tqdm
 
 """
-Crops the raw images to the desired dimensions, and prepends the data (directory name) to the images
+Crops the raw images to the desired dimensions, and prepends the date (directory name) to the images
 
 To use: python crop_images.py <raw image raw_image_path> <output raw_image_path>
 """
